@@ -1,0 +1,28 @@
+body {
+	background-image:url('omfgdogs.gif');
+}
+
+#disclaimer {
+	font-size: 40px;
+	color: white;
+	font-family: verdana;
+	position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+a:link {
+	text-decoration:none;
+	color: white;
+	text-shadow: 3px 3px #ff0000;
+	}
+
+a:visited{
+	text-decoration: none;
+	color: white;
+	text-shadow: 3px 3px #ff0000;
+}
+
+audio {
+	display: none;
+}
