@@ -1,14 +1,7 @@
+@media all and (min-width: 992px) {
+
 body {
 	background-image:url('omfgdogs.gif');
-}
-
-#disclaimer {
-	font-size: 40px;
-	color: white;
-	font-family: verdana;
-	position: fixed;
-    bottom: 0;
-    right: 0;
 }
 
 a:link {
@@ -25,4 +18,25 @@ a:visited{
 
 audio {
 	display: none;
+}
+
+#no_for_you {
+	font-size: 0;
+}
+
+
+#disclaimer {
+	font-size: 40px;
+	color: white;
+	font-family: verdana;
+	position: fixed;
+    bottom: 0;
+    right: 0;
+}
+}
+
+@media all and (max-width: 991px) {
+#disclaimer {
+	font-size: 0px;
+}
 }
