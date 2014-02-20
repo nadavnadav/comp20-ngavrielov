@@ -5,6 +5,24 @@
 
 <head>
 <title>Fecesbook</title>
+<script>
+function postFunction(){
+	var elem = document.getElementById("msg").value
+	console.log("test1");
+	console.log(elem);
+
+// Create a new, plain <span> element
+var sp1 = document.createElement("span")
+// Get a reference to the element, before we want to insert the element
+var sp2 = document.getElementById("old");
+	console.log("test3");
+// Get a reference to the parent element
+var parentDiv = sp2.parentNode;
+	console.log("test4");
+// Insert the new element into the DOM before sp2
+parentDiv.insertBefore(sp1, sp2);
+}
+</script>
 </head>
 
 <body>
@@ -20,9 +38,11 @@
 		</ul>
 	</div>
 	<h2 id="fullname">Barney Gumble</h2>
-	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" /></h3>
+	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="postFunction()"/></h3>
 	<h3>Updates</h3>
 	<div id="status">
+		<span id="old">
+		</span>
 	</div>
 	<div id="yesterday">
 		<h3>Updates from yesterday:</h3>
