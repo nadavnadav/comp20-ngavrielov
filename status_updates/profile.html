@@ -14,11 +14,11 @@ function postFunction(){
 	console.log(timerr);
 	console.log(date);
 	console.log(year);
-	
+
 	var timestamp = timerr;
 	date = new Date(timestamp);
 
-	var elem = (date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' ' + document.getElementById("msg").value)
+	var elem = (date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' - ' + document.getElementById("msg").value)
 	// Creates the new element to be inserted:
 	var sp1 = document.createElement("p")
 	// Gets a reference to the element which we will be inserting before:
