@@ -7,18 +7,28 @@
 <title>Fecesbook</title>
 <script>
 function postFunction(){
-	var elem = document.getElementById("msg").value
-//console.log(elem);
-// Creates the new element to be inserted:
-var sp1 = document.createElement("p")
-// Get a reference to the element, before we want to insert the element
-var sp2 = document.getElementById("old");
+	//stores user input into elem:
+	var timerr = new Date().getTime();
+	var date = new Date(timerr).getDate();
+	var year = new Date(timerr).getYear();
+	console.log(timerr);
+	console.log(date);
+	console.log(year);
+	
+	var timestamp = timerr;
+	date = new Date(timestamp);
+
+	var elem = (date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' ' + document.getElementById("msg").value)
+	// Creates the new element to be inserted:
+	var sp1 = document.createElement("p")
+	// Gets a reference to the element which we will be inserting before:
+	var sp2 = document.getElementById("old");
+	// Changes the text of our new element to be the desired text:
 	sp1.innerText = elem;
+	// Inserts the new elem before the first child of the old one:
 	sp2.insertBefore(sp1, sp2.firstChild);
-// Get a reference to the parent element
-//var parentDiv = sp2.parentNode;
-// Insert the new element into the DOM before sp2
-//parentDiv.insertBefore(sp1, sp2);
+	// Clears the box:
+	document.getElementById("msg").value = null;
 }
 </script>
 </head>
