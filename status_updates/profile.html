@@ -8,19 +8,17 @@
 <script>
 function postFunction(){
 	var elem = document.getElementById("msg").value
-	console.log("test1");
-	console.log(elem);
-
-// Create a new, plain <span> element
-var sp1 = document.createElement("span")
+//console.log(elem);
+// Creates the new element to be inserted:
+var sp1 = document.createElement("p")
 // Get a reference to the element, before we want to insert the element
 var sp2 = document.getElementById("old");
-	console.log("test3");
+	sp1.innerText = elem;
+	sp2.insertBefore(sp1, sp2.firstChild);
 // Get a reference to the parent element
-var parentDiv = sp2.parentNode;
-	console.log("test4");
+//var parentDiv = sp2.parentNode;
 // Insert the new element into the DOM before sp2
-parentDiv.insertBefore(sp1, sp2);
+//parentDiv.insertBefore(sp1, sp2);
 }
 </script>
 </head>
