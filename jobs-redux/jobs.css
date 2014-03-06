@@ -1,4 +1,19 @@
 p {
-color: blue;
+background-color: #cecece;
+border-radius: 3px;
+padding-left: 5px;
+}
+
+#blah {
+color: #492b13;
+}
+
+#blah2 {
+color: #755242;
+
+}
+
+#blah3 {
+color: #b58a62;
 
 }
