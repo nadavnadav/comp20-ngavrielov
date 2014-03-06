@@ -12,15 +12,14 @@
 		console.log("Company: " + parsedtext[0].company);
 		console.log("Position: " + parsedtext[0].position);
 		console.log("Location: " + parsedtext[0].location);
-		//document.getElementById("list").innerText=parsedtext[0].company;
 
-for (i = 0; i < parsedtext.length; i++)
-{
-	var para = document.createElement("p");
-	para.innerHTML = "<p>" + parsedtext[i].company + "<br/>" + parsedtext[i].position + "<br/>" + parsedtext[i].location;
-		var element=document.getElementById("list");
-		element.appendChild(para);
-}
+		for (i = 0; i < parsedtext.length; i++)
+		{
+			var para = document.createElement("p");
+			para.innerHTML = "<p>" + parsedtext[i].company + "<br/>" + parsedtext[i].position + "<br/>" + parsedtext[i].location;
+			var element=document.getElementById("list");
+			element.appendChild(para);
+		}
 
 	}
 </script>
