@@ -13,7 +13,7 @@
 		for (i = 0; i < parsedtext.length; i++)
 		{
 			var para = document.createElement("p");
-			para.innerHTML = "<div id='blah'>" + "Company: " + parsedtext[i].company + "<br/>" + "</div>" + "<div id='blah2'>"+ "Position: " + parsedtext[i].position + "<br/>" + "</div>"+ "<div id='blah3'>" + parsedtext[i].location; + "</div>";
+			para.innerHTML = "<div id='blah'>" + "Company: " + parsedtext[i].company + "<br/>" + "</div>" + "<div id='blah2'>"+ "Position: " + parsedtext[i].position + "<br/>" + "</div>"+ "<div id='blah3'>" + "Location: " + parsedtext[i].location; + "</div>";
 			var element=document.getElementById("list");
 			element.appendChild(para);
 		}
