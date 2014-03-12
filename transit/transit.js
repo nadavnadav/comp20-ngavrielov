@@ -1,61 +1,6 @@
-//from geolocation_map.html example:
-/*var request = new XMLHttpRequest();
-var map;
-var marker;
-var places;
-var mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
-  };
-
-function init()
-			{
-				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-				getMyLocation();
-			}
-			
-
-function getMyLocation() {
-	//from geo_example.html in class:
-        lat = -999;
-        lng = -999;
-        elem = document.getElementById("loc");
-        if (navigator.geolocation) {
-            // the navigator.geolocation object is supported on your browser
-            console.log("Call before navigator.geolocation");
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("Got location");
-                lat = position.coords.latitude;
-                lng = position.coords.longitude;
-                //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
-            });
-            console.log("Made the call to get location");
-            //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
-            renderMap();
-        }
-        else {
-            alert("Geolocation is not supported by your web browser.  What a shame!");
-        }
-    }
-
-function renderMap()
-{
-var me = new google.maps.LatLng(lat, lng);
-map.panTo(me);
-//service = new google.maps.places.PlacesService(map);
-		//		service.search(request, callback);
-
-}
-*/
-
-
 //From geolocation map example:
-var myLat = 0;
-
-
-
+			var myLat = 0;
 			var myLng = 0;
-			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
 			var myOptions = {
 						zoom: 13, // The larger the zoom number, the bigger the zoom
@@ -66,13 +11,48 @@ var myLat = 0;
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
 			var places;
+			var request;
 			
 			function init()
 			{
+				request = new XMLHttpRequest();
+				request.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true); //executes a get request to the URL
+				request.onreadystatechange = dataReady; //deals with response; onreadystatechange has to be set to a function when request is completed to handle the response
+				request.send(null); //execute!
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			
 				getMyLocation();
 			}
 			
+			function dataReady() {
+	//console.log("In dataready, readyState is " + xhr.readyState);
+	//The readystate numbers:
+	// 0 = not initalized
+	// 1 = set up
+	// 2 = sent
+	// 3 = in progress
+	// 4 = complete
+		if (request.readyState == 4 && request.status == 200) {
+			scheduleData = JSON.parse(request.responseText);
+			console.log(scheduleData.line);
+			color = scheduleData.line;
+			lineDrawer(color);
+		}
+		else if (request.readyState == 4 && request.status == 500){
+					//	scheduleDom = document.getElementById("schedule");
+					//	scheduleDom.innerHTML = '<p><img src="http://www.1art.com/old/6.jpg" alt="fail"/></p>';
+		}
+}
+
+			function lineDrawer(color){
+				if (color == 'red'){
+				}
+				if (color == 'orange'){
+				}
+				if (color == 'blue'){
+				}
+			}
+
 			function getMyLocation()
 			{
 				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
@@ -96,7 +76,7 @@ var myLat = 0;
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
-					title: "Here I Am!",
+					title: "Current location",
 					icon: icon_image,
 					animation: google.maps.Animation.DROP
 				});
@@ -154,3 +134,58 @@ var myLat = 0;
 					infowindow.open(map, this);
 				});
 			}
+
+		/*function parse() {
+		parsedtext = JSON.parse(request);
+		console.log(parsedtext[0].line);
+		}
+*/
+			//from geolocation_map.html example:
+/*var request = new XMLHttpRequest();
+var map;
+var marker;
+var places;
+var mapOptions = {
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644)
+  };
+
+function init()
+			{
+				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+				getMyLocation();
+			}
+			
+
+function getMyLocation() {
+	//from geo_example.html in class:
+        lat = -999;
+        lng = -999;
+        elem = document.getElementById("loc");
+        if (navigator.geolocation) {
+            // the navigator.geolocation object is supported on your browser
+            console.log("Call before navigator.geolocation");
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log("Got location");
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
+            });
+            console.log("Made the call to get location");
+            //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
+            renderMap();
+        }
+        else {
+            alert("Geolocation is not supported by your web browser.  What a shame!");
+        }
+    }
+
+function renderMap()
+{
+var me = new google.maps.LatLng(lat, lng);
+map.panTo(me);
+//service = new google.maps.places.PlacesService(map);
+		//		service.search(request, callback);
+
+}
+*/
