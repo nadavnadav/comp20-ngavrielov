@@ -44,13 +44,47 @@
 		}
 }
 
-			function lineDrawer(color){
-				if (color == 'red'){
-				}
+			function lineDrawer(color){     
+				//if (color == 'red'){     
+					var orangelines = '[{"color":"orange","name":"North Station","lat":42.365577,"lng":-71.06129},{"color":"orange","name":"Oak Grove","lat":42.43668,"lng":-71.071097},{"color":"orange","name":"Roxbury Crossing","lat":42.331397,"lng":-71.095451},{"color":"orange","name":"Ruggles","lat":42.336377,"lng":-71.088961},{"color":"orange","name":"State Street","lat":42.358978,"lng":-71.057598},{"color":"orange","name":"Stony Brook","lat":42.317062,"lng":-71.104248},{"color":"orange","name":"Sullivan","lat":42.383975,"lng":-71.076994},{"color":"orange","name":"Tufts Medical","lat":42.349662,"lng":-71.063917},{"color":"orange","name":"Wellington","lat":42.40237,"lng":-71.077082}]';     
+					positions = []
+					markers = [];
+					testparsed = JSON.parse(orangelines);
+					icont_image = 'https://cdn4.iconfinder.com/data/icons/48x48-free-object-icons/48/Elephant.png';
+					for (i=0; i < 9; i++)
+					{
+						console.log(i);
+						marker_a = new google.maps.LatLng(testparsed[i].lat, testparsed[i].lng);
+						positions.push(marker_a);
+						markers.push(new google.maps.Marker({
+							position: marker_a,
+							title: "Station",
+							icon: icont_image,
+						}));
+					} 
+					for (i = 0; i<markers.length;i++) {
+
+						console.log(i);
+						markers[i].setMap(map);
+					}
+					// Please refer to https://developers.google.com/maps/documentation/javascript/examples/polyline-simple
+					samplePolyLine= new google.maps.Polyline({
+    					path: positions,
+					    geodesic: true,
+    					strokeColor: '#FF0000',
+    					strokeOpacity: 1.0,
+					    strokeWeight: 2
+					  });
+					samplePolyLine.setMap(map);
+				/*}     
 				if (color == 'orange'){
+
+
 				}
 				if (color == 'blue'){
-				}
+
+
+				}*/
 			}
 
 			function getMyLocation()
@@ -134,6 +168,10 @@
 					infowindow.open(map, this);
 				});
 			}
+
+
+
+
 
 		/*function parse() {
 		parsedtext = JSON.parse(request);
