@@ -46,12 +46,12 @@
 
 			function lineDrawer(color){     
 				//if (color == 'red'){     
-					var orangelines = '[{"color":"orange","name":"North Station","lat":42.365577,"lng":-71.06129},{"color":"orange","name":"Oak Grove","lat":42.43668,"lng":-71.071097},{"color":"orange","name":"Roxbury Crossing","lat":42.331397,"lng":-71.095451},{"color":"orange","name":"Ruggles","lat":42.336377,"lng":-71.088961},{"color":"orange","name":"State Street","lat":42.358978,"lng":-71.057598},{"color":"orange","name":"Stony Brook","lat":42.317062,"lng":-71.104248},{"color":"orange","name":"Sullivan","lat":42.383975,"lng":-71.076994},{"color":"orange","name":"Tufts Medical","lat":42.349662,"lng":-71.063917},{"color":"orange","name":"Wellington","lat":42.40237,"lng":-71.077082}]';     
+					var orangelines = '[{"color":"orange","name":"Oak Grove","lat":42.43668,"lng":-71.071097},{"color":"orange","name":"Malden Center","lat":42.426632,"lng":-71.07411},{"color":"orange","name":"Wellington","lat":42.40237,"lng":-71.077082},{"color":"orange","name":"Sullivan","lat":42.383975,"lng":-71.076994},{"color":"orange","name":"Community College","lat":42.373622,"lng":-71.069533},{"color":"orange","name":"North Station","lat":42.365577,"lng":-71.06129},{"color":"orange","name":"Haymarket","lat":42.363021,"lng":-71.05829},{"color":"orange","name":"State Street","lat":42.358978,"lng":-71.057598},{"color":"orange","name":"Downtown Crossing","lat":42.355518,"lng":-71.060225},{"color":"orange","name":"Chinatown","lat":42.352547,"lng":-71.062752},{"color":"orange","name":"Tufts Medical","lat":42.349662,"lng":-71.063917},{"color":"orange","name":"Back Bay","lat":42.34735,"lng":-71.075727},{"color":"orange","name":"Mass Ave","lat":42.341512,"lng":-71.083423},{"color":"orange","name":"Ruggles","lat":42.336377,"lng":-71.088961},{"color":"orange","name":"Roxbury Crossing","lat":42.331397,"lng":-71.095451},{"color":"orange","name":"Jackson Square","lat":42.323132,"lng":-71.099592},{"color":"orange","name":"Stony Brook","lat":42.317062,"lng":-71.104248},{"color":"orange","name":"Green Street","lat":42.310525,"lng":-71.107414},{"color":"orange","name":"Forest Hills","lat":42.300523,"lng":-71.113686}]';     
 					positions = []
 					markers = [];
 					testparsed = JSON.parse(orangelines);
-					icont_image = 'https://cdn4.iconfinder.com/data/icons/48x48-free-object-icons/48/Elephant.png';
-					for (i=0; i < 9; i++)
+					orange_icon = 'orange_icon.png';
+					for (i=0; i < 19; i++)
 					{
 						console.log(i);
 						marker_a = new google.maps.LatLng(testparsed[i].lat, testparsed[i].lng);
@@ -59,7 +59,7 @@
 						markers.push(new google.maps.Marker({
 							position: marker_a,
 							title: "Station",
-							icon: icont_image,
+							icon: orange_icon,
 						}));
 					} 
 					for (i = 0; i<markers.length;i++) {
@@ -73,7 +73,7 @@
 					    geodesic: true,
     					strokeColor: '#FF0000',
     					strokeOpacity: 1.0,
-					    strokeWeight: 2
+					    strokeWeight: 1
 					  });
 					samplePolyLine.setMap(map);
 				/*}     
