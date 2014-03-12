@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test</title>
+	<title>Geolocation Map Example</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
 	<link rel="stylesheet" href="styles.css">
 	<script src="transit.js"></script>
 </head>
-<body onload="getMyLocation()">
-    <div id="loc">Loading...</div>
+<body onload="init()">
+    <!--<div id="loc">Loading...</div>-->
+	<div id="map_canvas"></div>
 </body>
 </html>
