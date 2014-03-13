@@ -1,4 +1,3 @@
-//From geolocation map example:
 			var myLat = 0;
 			var myLng = 0;
 			var me = new google.maps.LatLng(myLat, myLng);
@@ -25,7 +24,6 @@
 			}
 			
 			function dataReady() {
-	//console.log("In dataready, readyState is " + xhr.readyState);
 	//The readystate numbers:
 	// 0 = not initalized
 	// 1 = set up
@@ -39,8 +37,7 @@
 			lineDrawer(color);
 		}
 		else if (request.readyState == 4 && request.status == 500){
-					//	scheduleDom = document.getElementById("schedule");
-					//	scheduleDom.innerHTML = '<p><img src="http://www.1art.com/old/6.jpg" alt="fail"/></p>';
+			//failed to load
 		}
 }
 
@@ -67,20 +64,18 @@
 							console.log(i);
 							marker_a = new google.maps.LatLng(orangeparsed[i].lat, orangeparsed[i].lng);
 							orange_positions.push(marker_a);
-							orange_markers.push(new google.maps.Marker({
+							var station_name = orangeparsed[i].name;
+							market_set(marker_a, station_name, orange_icon);
+							/*orange_markers.push(new google.maps.Marker({
 								position: marker_a,
-								title: "Station" + "hi",
+								title: "hi",
 								icon: orange_icon,
-							}));
-							google.maps.event.addListener(orange_markers[i], 'click', function() {
-							infowindow.setContent("hi");
-							infowindow.open(map, this);
-							});
+							}));*/
 						} 
 						for (i = 0; i<orange_markers.length;i++) {
-							/*google.maps.event.addListener(orange_markers[0], 'click', function() {
+							/*google.maps.event.addListener(orange_markers[i], 'click', function() {
 							infowindow.setContent("hi");
-							infowindow.open(map, orange_markers[1]);
+							infowindow.open(map, orange_markers[i]);
 							});*/
 							console.log(i);
 							orange_markers[i].setMap(map);
@@ -94,6 +89,30 @@
 						    strokeWeight: 2
 						  });
 						orangePolyLine.setMap(map);
+
+						for (i = 0; i < orangeparsed.length; i++)
+						{
+							var test123 = orangeparsed[i].name;
+							google.maps.event.addListener(orange_markers[i], 'click', function() {
+							infowindow.setContent(test123);
+							infowindow.open(map, this);
+							});
+						}
+					}
+
+					function marker_set(marker, name, icon)
+					{
+						var marker = new google.maps.Marker({
+						map: map,
+						position: marker,
+						icon: icon,
+						});
+
+						google.maps.event.addListener(marker, 'click', function() {
+						infowindow.close();
+						infowindow.setContent(name);
+						infowindow.open(map, this);
+						});
 					}
 
 
@@ -236,17 +255,6 @@
   				} else {
     				marker.setAnimation(google.maps.Animation.BOUNCE);
   				}
-			}
-			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
-			function callback(results, status)
-			{
-				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					alert("Got places back!");
-					places = results;
-					for (var i = 0; i < results.length; i++) {
-						createMarker(results[i]);
-					}
-				}
 			}
 			
 			function createMarker(place)
