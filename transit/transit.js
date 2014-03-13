@@ -75,7 +75,6 @@
 							google.maps.event.addListener(orange_markers[i], 'click', function() {
 							infowindow.setContent("hi");
 							infowindow.open(map, this);
-
 							});
 						} 
 						for (i = 0; i<orange_markers.length;i++) {
@@ -110,6 +109,10 @@
 								title: "Station",
 								icon: blue_icon,
 							}));
+							google.maps.event.addListener(blue_markers[i], 'click', function() {
+							infowindow.setContent("hi");
+							infowindow.open(map, this);
+							});
 						} 
 						for (i = 0; i<blue_markers.length;i++) {
 							console.log(i);
@@ -135,6 +138,10 @@
 								title: "Station",
 								icon: red_icon,
 							}));
+							google.maps.event.addListener(red_a_markers[i], 'click', function() {
+							infowindow.setContent("hi");
+							infowindow.open(map, this);
+							});
 						} 
 						for (i=0; i < 17; i++) //Map the first fork of the red line
 						{
