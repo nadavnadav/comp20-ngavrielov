@@ -69,15 +69,24 @@
 							orange_positions.push(marker_a);
 							orange_markers.push(new google.maps.Marker({
 								position: marker_a,
-								title: "Station",
+								title: "Station" + "hi",
 								icon: orange_icon,
 							}));
+							google.maps.event.addListener(orange_markers[i], 'click', function() {
+							infowindow.setContent("hi");
+							infowindow.open(map, this);
+
+							});
 						} 
 						for (i = 0; i<orange_markers.length;i++) {
-
+							/*google.maps.event.addListener(orange_markers[0], 'click', function() {
+							infowindow.setContent("hi");
+							infowindow.open(map, orange_markers[1]);
+							});*/
 							console.log(i);
 							orange_markers[i].setMap(map);
 						}
+
 						orangePolyLine= new google.maps.Polyline({
 	    					path: orange_positions,
 						    geodesic: true,
@@ -87,6 +96,8 @@
 						  });
 						orangePolyLine.setMap(map);
 					}
+
+
 
 					if (color == 'blue'){
 						for (i=0; i < 12; i++)
@@ -245,62 +256,3 @@
 					infowindow.open(map, this);
 				});
 			}
-
-
-
-
-
-		/*function parse() {
-		parsedtext = JSON.parse(request);
-		console.log(parsedtext[0].line);
-		}
-*/
-			//from geolocation_map.html example:
-/*var request = new XMLHttpRequest();
-var map;
-var marker;
-var places;
-var mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
-  };
-
-function init()
-			{
-				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-				getMyLocation();
-			}
-			
-
-function getMyLocation() {
-	//from geo_example.html in class:
-        lat = -999;
-        lng = -999;
-        elem = document.getElementById("loc");
-        if (navigator.geolocation) {
-            // the navigator.geolocation object is supported on your browser
-            console.log("Call before navigator.geolocation");
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("Got location");
-                lat = position.coords.latitude;
-                lng = position.coords.longitude;
-                //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
-            });
-            console.log("Made the call to get location");
-            //elem.innerHTML = "<h1>You are in " + lat + ", " + lng + "</h1>";
-            renderMap();
-        }
-        else {
-            alert("Geolocation is not supported by your web browser.  What a shame!");
-        }
-    }
-
-function renderMap()
-{
-var me = new google.maps.LatLng(lat, lng);
-map.panTo(me);
-//service = new google.maps.places.PlacesService(map);
-		//		service.search(request, callback);
-
-}
-*/
