@@ -65,7 +65,7 @@
 							marker_a = new google.maps.LatLng(orangeparsed[i].lat, orangeparsed[i].lng);
 							orange_positions.push(marker_a);
 							var station_name = orangeparsed[i].name;
-							market_set(marker_a, station_name, orange_icon);
+							marker_set(marker_a, station_name, orange_icon);
 							/*orange_markers.push(new google.maps.Marker({
 								position: marker_a,
 								title: "hi",
@@ -90,14 +90,14 @@
 						  });
 						orangePolyLine.setMap(map);
 
-						for (i = 0; i < orangeparsed.length; i++)
+						/*for (i = 0; i < orangeparsed.length; i++)
 						{
 							var test123 = orangeparsed[i].name;
 							google.maps.event.addListener(orange_markers[i], 'click', function() {
 							infowindow.setContent(test123);
 							infowindow.open(map, this);
 							});
-						}
+						}*/
 					}
 
 					function marker_set(marker, name, icon)
@@ -107,10 +107,9 @@
 						position: marker,
 						icon: icon,
 						});
-
 						google.maps.event.addListener(marker, 'click', function() {
 						infowindow.close();
-						infowindow.setContent(name);
+						infowindow.setContent("Station name: " + name);
 						infowindow.open(map, this);
 						});
 					}
@@ -123,15 +122,14 @@
 							console.log(i);
 							marker_b = new google.maps.LatLng(blueparsed[i].lat, blueparsed[i].lng);
 							blue_positions.push(marker_b);
-							blue_markers.push(new google.maps.Marker({
+							var station_name = blueparsed[i].name;
+							marker_set(marker_b, station_name, blue_icon);
+							/*blue_markers.push(new google.maps.Marker({
 								position: marker_b,
 								title: "Station",
 								icon: blue_icon,
-							}));
-							google.maps.event.addListener(blue_markers[i], 'click', function() {
-							infowindow.setContent("hi");
-							infowindow.open(map, this);
-							});
+							}));*/
+
 						} 
 						for (i = 0; i<blue_markers.length;i++) {
 							console.log(i);
@@ -152,7 +150,9 @@
 						{
 							console.log(i);
 							marker_c = new google.maps.LatLng(redparsed[i].lat, redparsed[i].lng);
-							red_a_markers.push(new google.maps.Marker({
+							var station_name = redparsed[i].name;
+							marker_set(marker_c, station_name, red_icon);
+							/*red_a_markers.push(new google.maps.Marker({
 								position: marker_c,
 								title: "Station",
 								icon: red_icon,
@@ -160,7 +160,7 @@
 							google.maps.event.addListener(red_a_markers[i], 'click', function() {
 							infowindow.setContent("hi");
 							infowindow.open(map, this);
-							});
+							});*/
 						} 
 						for (i=0; i < 17; i++) //Map the first fork of the red line
 						{
