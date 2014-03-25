@@ -71,8 +71,8 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 							marker_a = new google.maps.LatLng(orangeparsed[i].lat, orangeparsed[i].lng);
 							orange_positions.push(marker_a);
 							var station_name = orangeparsed[i].name;
-							stops(scheduleData, station_name);
-							marker_set(marker_a, station_name, orange_icon);
+							//stops(scheduleData, station_name);
+							marker_set(marker_a, station_name, orange_icon, scheduleData);
 						} 
 						for (i = 0; i<orange_markers.length;i++) {
 							orange_markers[i].setMap(map);
@@ -89,29 +89,13 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 					closestStation(orangeparsed);
 					}
 
-					function marker_set(marker, name, icon)
-					{
-						var marker = new google.maps.Marker({
-						map: map,
-						position: marker,
-						icon: icon,
-						});
-						google.maps.event.addListener(marker, 'click', function() {
-						infowindow.close();
-						infowindow.setContent("Station name: " + name);
-						infowindow.open(map, this);
-						});
-					}
-
-
-
 					if (color == 'blue'){
 						for (i=0; i < 12; i++)
 						{
 							marker_b = new google.maps.LatLng(blueparsed[i].lat, blueparsed[i].lng);
 							blue_positions.push(marker_b);
 							var station_name = blueparsed[i].name;
-							marker_set(marker_b, station_name, blue_icon);
+							marker_set(marker_b, station_name, blue_icon, scheduleData);
 							/*blue_markers.push(new google.maps.Marker({
 								position: marker_b,
 								title: "Station",
@@ -138,7 +122,7 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 						{
 							marker_c = new google.maps.LatLng(redparsed[i].lat, redparsed[i].lng);
 							var station_name = redparsed[i].name;
-							marker_set(marker_c, station_name, red_icon);
+							marker_set(marker_c, station_name, red_icon, scheduleData);
 							/*red_a_markers.push(new google.maps.Marker({
 								position: marker_c,
 								title: "Station",
@@ -187,22 +171,41 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 					}
 			}
 
-			
-			function stops(scheduleData, station_name){
-				/*for (i = 0; i < scheduleData["schedule"].length; i++)
+				function marker_set(marker_location, name, icon, scheduleData)
 				{
-					trip = scheduleData["schedule"][i];
+					var marker = new google.maps.Marker({
+					map: map,
+					position: marker_location,
+					icon: icon,
+					});
+					google.maps.event.addListener(marker, 'click', function() {
+					infowindow.close();
+					infowindow.setContent(stops(scheduleData, name));
+					infowindow.open(map, this);
+					});
+				}
+
+			function stops(scheduleData, station_name){
+				//var count = 0;
+				var scheduleInformation = "Station name: " + station_name + "<br>" + "<table><tr><td>Direction</td> <td>Schedule</td></tr>"
+				for (var i = 0; i < scheduleData["schedule"].length; i++)
+				{
+					var trip = scheduleData["schedule"][i];
 					//console.log(trip);
-					s = trip["Predictions"];
-					for (j = 0; j < s.length; j++){
-						stationThis = s[j];
+					var predictions = trip["Predictions"];
+					for (var j = 0; j < predictions.length; j++){
+						var stationThis = predictions[j];
 						if (stationThis["Stop"] == station_name){ //or is this just stationThis ==
 							//The info box for station["stop"] gets the direction and the time remaining
-							console.log(stationThis["Seconds"]);
-							console.log(desination["Destination"]);
+							scheduleInformation += "<tr><td>" + trip["Destination"] + "</td><td>" + stationThis["Seconds"]/60 + "</td></tr>";
+							//console.log(trip["Destination"]);
+							//console.log(count);
+							//count++;
 						}
 					}
-				}*/
+				}
+				scheduleInformation += "</table>";
+				return scheduleInformation;
 			}
 
 
