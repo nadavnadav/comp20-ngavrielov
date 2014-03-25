@@ -1,8 +1,8 @@
-if (typeof(Number.prototype.toRad) === "undefined") {
-  Number.prototype.toRad = function() {
-    return this * Math.PI / 180;
-  }
-}			
+			if (typeof(Number.prototype.toRad) === "undefined") {
+			  Number.prototype.toRad = function() {
+			    return this * Math.PI / 180;
+			  }
+			}		 //got that from http://stackoverflow.com/questions/5260423/torad-javascript-function-throwing-error	
 
 			var myLat = 0;
 			var myLng = 0;
