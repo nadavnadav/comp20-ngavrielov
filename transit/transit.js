@@ -1,3 +1,9 @@
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
+  }
+}			
+
 			var myLat = 0;
 			var myLng = 0;
 			var me = new google.maps.LatLng(myLat, myLng);
@@ -80,6 +86,7 @@
 						    strokeWeight: 2
 						  });
 						orangePolyLine.setMap(map);
+					closestStation(orangeparsed);
 					}
 
 					function marker_set(marker, name, icon)
@@ -123,6 +130,7 @@
 						    strokeWeight: 2
 						  });
 						bluePolyLine.setMap(map);
+						closestStation(blueparsed);
 					}
 
 					if (color == 'red'){     
@@ -175,21 +183,23 @@
 						    strokeWeight: 2
 						  });
 						redPolyLineB.setMap(map);
-
+						closestStation(redparsed);
 					}
 			}
 
 			
 			function stops(scheduleData, station_name){
-				/*for (i = 0; i < scheduleData.schedule.length; i++)
+				/*for (i = 0; i < scheduleData["schedule"].length; i++)
 				{
-					trip = scheduleData.schedule[i];
+					trip = scheduleData["schedule"][i];
 					//console.log(trip);
 					s = trip["Predictions"];
 					for (j = 0; j < s.length; j++){
-						//stationThis = s[j];
-						if (stationThis["Stop"] == station_name){
+						stationThis = s[j];
+						if (stationThis["Stop"] == station_name){ //or is this just stationThis ==
 							//The info box for station["stop"] gets the direction and the time remaining
+							console.log(stationThis["Seconds"]);
+							console.log(desination["Destination"]);
 						}
 					}
 				}*/
@@ -216,23 +226,7 @@
 				// Update map and go there...
 				map.panTo(me);
 				//Elephant image comes from https://cdn4.iconfinder.com/data/icons/48x48-free-object-icons/48/Elephant.png
-				var icon_image = 'elephant.png';
-				// Create a marker
-				marker = new google.maps.Marker({
-					position: me,
-					title: "Current location",
-					icon: icon_image,
-					animation: google.maps.Animation.DROP
-				});
-
-				marker.setMap(map);
-				google.maps.event.addListener(marker, 'click', toggleBounce);
-
-				// Open info window on click of marker
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(marker.title);
-					infowindow.open(map, marker);
-				});
+			
 				
 				// Calling Google Places API
 				/*var request = {
@@ -266,4 +260,78 @@
 					infowindow.setContent(place.name);
 					infowindow.open(map, this);
 				});
+			}
+
+			function closestStation(stations){
+
+				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var userLat = position.coords.latitude;
+						var userLng = position.coords.longitude;
+						me = new google.maps.LatLng(userLat, userLng);
+						closest = stations[0];
+						lat1 = userLat;
+						lng1 = userLng;
+						smallestDist = distance(lat1, closest.lat, lng1, closest.lng);
+						for (i = 0; i < stations.length; i++)
+						{
+							lat2 = stations[i].lat;
+							lng2 = stations[i].lng;
+							newDist = distance(lat2, lat1, lng2, lng1);
+							if (newDist < smallestDist)
+								{
+									smallestDist = newDist;
+									closest = stations[i];
+								}
+						}
+						var closestStationCoord = new google.maps.LatLng(closest.lat, closest.lng);
+
+						smallestDist = smallestDist * .621371;
+
+						closestStationLine = new google.maps.Polyline({
+		    					path: [me, closestStationCoord],
+							    geodesic: true,
+		    					strokeColor: '#000000',
+		    					strokeOpacity: .7,
+							    strokeWeight: 2
+							  });
+						closestStationLine.setMap(map);
+						// Update map and go there...
+						map.panTo(me);
+						var icon_image = 'elephant.png';
+						// Create a marker
+						marker = new google.maps.Marker({
+							position: me,
+							title: "Current location",
+							icon: icon_image,
+							animation: google.maps.Animation.DROP
+						});
+
+						marker.setMap(map);
+						google.maps.event.addListener(marker, 'click', toggleBounce);
+
+						// Open info window on click of marker
+						google.maps.event.addListener(marker, 'click', function() {
+							infowindow.setContent(marker.title + "<br> Miles to nearest station (" + closest.name + "): " + smallestDist);
+							infowindow.open(map, marker);
+						});
+					});
+				}
+				else {
+					alert("Geolocation is not supported by your web browser.");
+				}
+			}
+
+			function distance(lat2, lat1, lon2, lon1){
+				var R = 6371; // km
+				var dLat = (lat2-lat1).toRad();
+				var dLon = (lon2-lon1).toRad();
+				var lat1 = lat1.toRad();
+				var lat2 = lat2.toRad();
+
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+				        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				var d = R * c;
+				return d;
 			}
