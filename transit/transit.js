@@ -186,21 +186,16 @@
 				}
 
 			function stops(scheduleData, station_name){
-				//var count = 0;
 				var scheduleInformation = "Station name: " + station_name + "<br>" + "<table><tr><td>Direction</td> <td>Schedule</td></tr>"
 				for (var i = 0; i < scheduleData["schedule"].length; i++)
 				{
 					var trip = scheduleData["schedule"][i];
-					//console.log(trip);
 					var predictions = trip["Predictions"];
 					for (var j = 0; j < predictions.length; j++){
 						var stationThis = predictions[j];
 						if (stationThis["Stop"] == station_name){ //or is this just stationThis ==
 							//The info box for station["stop"] gets the direction and the time remaining
 							scheduleInformation += "<tr><td>" + trip["Destination"] + "</td><td>" + stationThis["Seconds"]/60 + "</td></tr>";
-							//console.log(trip["Destination"]);
-							//console.log(count);
-							//count++;
 						}
 					}
 				}
@@ -228,17 +223,6 @@
 				me = new google.maps.LatLng(userLat, userLng);
 				// Update map and go there...
 				map.panTo(me);
-				//Elephant image comes from https://cdn4.iconfinder.com/data/icons/48x48-free-object-icons/48/Elephant.png
-			
-				
-				// Calling Google Places API
-				/*var request = {
-					location: me,
-					radius: '500',
-					types: ['food']
-				};
-				service = new google.maps.places.PlacesService(map);
-				service.search(request, callback);*/
 			}
 			
 			function toggleBounce() {
@@ -306,7 +290,7 @@
 						marker = new google.maps.Marker({
 							position: me,
 							title: "Current location",
-							icon: icon_image,
+							icon: icon_image, 	//Elephant image comes from https://cdn4.iconfinder.com/data/icons/48x48-free-object-icons/48/Elephant.png
 							animation: google.maps.Animation.DROP
 						});
 
