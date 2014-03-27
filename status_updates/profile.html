@@ -15,22 +15,34 @@ function postFunction(){
 	var timestamp = timerr;
 	date = new Date(timestamp);
 
-	var elem = (date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' - ' + document.getElementById("msg").value)
+	var elem = (date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' - ' + document.getElementById("msg").value);
 	// Creates the new element to be inserted:
-	var sp1 = document.createElement("p")
+	var sp1 = document.createElement("p");
 	// Gets a reference to the element which we will be inserting before:
 	var sp2 = document.getElementById("old");
 	// Changes the text of our new element to be the desired text:
+	localStorage.setItem(date.getTime(), elem);
 	sp1.innerText = elem;
 	// Inserts the new elem before the first child of the old one:
 	sp2.insertBefore(sp1, sp2.firstChild);
 	// Clears the box:
 	document.getElementById("msg").value = null;
 }
+
+	function reload()
+	{
+		for (key in localStorage) {
+		var sp1 = document.createElement("p");
+		var sp2 = document.getElementById("old");
+		sp1.innerText = localStorage[key];
+		sp2.insertBefore(sp1, sp2.firstChild);
+		}
+	}
+
 </script>
 </head>
 
-<body>
+<body onload="reload()">
 	<h1>Fecebook</h1>
 	<div id="nav">
 		<ul>
