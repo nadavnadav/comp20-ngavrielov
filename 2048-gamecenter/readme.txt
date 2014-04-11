@@ -19,6 +19,6 @@ The final score and grid are found in the game_manager.js file. They are stored 
   }
 ~~~~~~~~~~
 
-This indicates that they are stored in 'this', which I serialize and place in the object info. We can access them, as I do above, through using info.score and info.grid.
+This indicates that they are stored and accessible in 'this', which I serialize and place in the object 'info'. We can access them, as I do above, through using info.score and info.grid.
 
 In order to send them to my web application, I had to use $.post (as shown above) in game_manager.js. I put the URL of the score center. Then for the data itself, I hardcoded my username, and input the score and grid from the game as described above.
