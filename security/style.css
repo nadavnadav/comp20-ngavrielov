@@ -1,0 +1,17 @@
+.finding{
+	background-color: #F2F2F2;
+	padding-left: 5px;
+	border-width: 1px;
+	border-color: #727273;
+	width: 1100px;
+}
+
+img{
+	border-color: #727273;
+	border-style: solid;
+	border-width: 1px;
+}
+
+h1{
+	font-family: "Verdana", serif;
+}
