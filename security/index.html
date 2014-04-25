@@ -13,50 +13,64 @@
 	<div class="finding">
 		<h3>1: Inserting any data</h3>
 		<h4>Issue</h4>
+		<p>Inserting any data into the fields
 		<h4>Location</h4>
+		<p>/submit.json
 		<h4>Severity</h4>
+		<p>Very severe
 		<h4>Description</h4>
+		<p>You can pretty much insert anything into the fields. For example, I inserted a picture of Richard Nixon into the username field. But someone with more malicious intentions could insert something more dangerous, particularly in the form of Javascript.
 		<h4>Proof</h4>
-		<h4>Resolution<h4>
-		<img src="nixon_hack.png">
-		<br>
-		<p>How this was accomplished:
-		<br>
+		<img src="nixon_hack.png"><br>
 		<img src="curl_nixon_hack.png">
+		<h4>Resolution</h4>
+		<p>This issue can be fixed by escaping the data that the user inputs. For instance, the characters < and > could be escaped so as to prevent special tags from being inserted as data.
 	</div>
 	<div class="finding">
 		<h3>2: Submitting extra fields into the database</h3>
 		<h4>Issue</h4>
+		Inserting extra data
 		<h4>Location</h4>
+		/submit.json
 		<h4>Severity</h4>
+		Moderate
 		<h4>Description</h4>
+		You can insert extra data by including extra fields, as indicated below. This can be a problem because it wastes space in the database. Plus, someone could store something malicious in an extra field.
 		<h4>Proof</h4>
-		<h4>Resolution<h4>
 		<img src="curl_extra_field_hack.png">
+		<h4>Resolution</h4>
+		The post request should be limited so as to only accept the specific fields that are required.
 	</div>
 	<div class="finding">
 		<h3>3: Cross domain requests</h3>
 		<h4>Issue</h4>
+		Cross domain requests from anywhere
 		<h4>Location</h4>
+		The app.js
 		<h4>Severity</h4>
+		Severe
 		<h4>Description</h4>
-		<h4>Proof</h4>
-		<h4>Resolution<h4>
+		Cross domain requests are enabled for anywhere because of the *. This could be dangerous as it opens the floodgates to anyone who wants to submit such a request.
+		<h4>Proof & Resolution</h4>
+		Thus a resolution is to limit it to a specific domain. Perhaps a URL with a white list of domains.
 		<img src="post_fix_hack.png">
 	</div>
 	<div class="finding">
 		<h3>4: Accessing all data</h3>
 		<h4>Issue</h4>
+		Easy to obtain access to all data [found with the help of Sid and George Brown]
 		<h4>Location</h4>
+		/scores.json
 		<h4>Severity</h4>
+		Very severe
 		<h4>Description</h4>
+		Anyone who puts "$[ne]" for one of the fields can gain access to all of the data.
 		<h4>Proof</h4>
-		<h4>Resolution<h4>
-		<p>This one found with the help of Sid and George Brown:
-		<br>
 		<img src="not_equal_hack.png">
+		<h4>Resolution</h4>
+		
+		<br>
 	</div>
-
 	<h2>Issues Found</h2>
 	<h2>Conclusions</h2>
 </body>
