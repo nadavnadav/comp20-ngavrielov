@@ -50,6 +50,7 @@ app.get('/', function(request, response) {
 
 app.post('/submit.json', function(request, response) {
 response.header("Access-Control-Allow-Origin", "*");
+//response.header("Access-Control-Allow-Origin", "");
 response.header("Access-Control-Allow-Headers", "X-Requested-With");
     var user = request.body.username;
     var grid = request.body.grid;
