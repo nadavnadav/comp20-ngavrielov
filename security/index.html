@@ -8,8 +8,17 @@
 <body>
 	<h1>Security Report</h1>
 	<h2>Introduction</h2>
+	<p>I conducted a review of Nolan's gamecenter to determine how vulnerable it is. The vulnerabilities that I found ranged from being very severe to less so. I have compiled a report with each of the vulnerabilities below.
 	<h2>Methodology</h2>
+	<p>My method was to go to Nolan's gamecenter and--based off of my experience with my gamecenter--try to guess certain vulnerabilities he may have had. The main tool I used for doing this was curl. Through curling different types of data, I was able to test his database. Then, I opened his source code to find any further areas that I could expose as vulnerabilities.
 	<h2>Abstract of Findings</h2>
+	<ol>
+		<li>The first issue that I found was that it is possible to insert any data into any of the fields in the database. This means you could insert HTML, JS, or something else, which could lead to serious issues for users and damage the website.</li>
+		<li>The second issue I found was that you could submit extra fields into the database. This means you could submit as much data as you want to the database and not be limited in any way, which could pose major problems for the website and its speed.</li>
+		<li>The third issue I found is that cross-domain sourcing is enabled for all websites. That means anyone could post data from anywhere, without limit by domain.</li>
+		<li>The last issue I found was that through a simple manipulation of the URL, one could gain access to all of the data in the database. If there is a sensitive or confidential information in the database, this is a major issue.</li>
+	</ol>
+	<h2>Issues found</h2>
 	<div class="finding">
 		<h3>1: Inserting any data</h3>
 		<h4>Issue</h4>
@@ -68,10 +77,10 @@
 		<h4>Proof</h4>
 		<img src="not_equal_hack.png">
 		<h4>Resolution</h4>
-		
+		The database should be edited so that nobody can simply access all of the data as I did by entering [$ne].
 		<br>
 	</div>
-	<h2>Issues Found</h2>
 	<h2>Conclusions</h2>
+	<p>Doing this security report revealed several important vulnerabilities in Nolan's (and my) website. Through a few simple manipulations, users could gain access to all of the data in the database, post data from anywhere they wish, and post any amount of data that they wish. Combined, these could all pose major problems for the website and thus are key vulnerabilities that would need to be fixed. It is important to limit these holes in the website to prevent anyone who has malicious intents from being able to bring down the website or damage it.
 </body>
 </html>
